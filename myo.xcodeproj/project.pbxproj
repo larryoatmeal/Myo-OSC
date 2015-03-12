@@ -1,0 +1,604 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		465AB05B1AB1239200E24079 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB05A1AB1239200E24079 /* main.m */; };
+		465AB05E1AB1239200E24079 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB05D1AB1239200E24079 /* AppDelegate.m */; };
+		465AB0611AB1239200E24079 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB0601AB1239200E24079 /* ViewController.m */; };
+		465AB0641AB1239200E24079 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 465AB0621AB1239200E24079 /* Main.storyboard */; };
+		465AB0661AB1239200E24079 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 465AB0651AB1239200E24079 /* Images.xcassets */; };
+		465AB0691AB1239300E24079 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 465AB0671AB1239300E24079 /* LaunchScreen.xib */; };
+		465AB0751AB1239300E24079 /* myoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB0741AB1239300E24079 /* myoTests.m */; };
+		465AB07F1AB123AA00E24079 /* MyoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465AB07E1AB123AA00E24079 /* MyoKit.framework */; };
+		465AB0811AB123C400E24079 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465AB0801AB123C400E24079 /* CoreBluetooth.framework */; };
+		465AB0831AB123D700E24079 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465AB0821AB123D700E24079 /* SystemConfiguration.framework */; };
+		465AB0A81AB143AB00E24079 /* F53OSCBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB0871AB143AB00E24079 /* F53OSCBundle.m */; };
+		465AB0A91AB143AB00E24079 /* F53OSCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB0891AB143AB00E24079 /* F53OSCClient.m */; };
+		465AB0AA1AB143AB00E24079 /* F53OSCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB08C1AB143AB00E24079 /* F53OSCMessage.m */; };
+		465AB0AB1AB143AB00E24079 /* F53OSCPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB08E1AB143AB00E24079 /* F53OSCPacket.m */; };
+		465AB0AC1AB143AB00E24079 /* F53OSCParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB0901AB143AB00E24079 /* F53OSCParser.m */; };
+		465AB0AD1AB143AB00E24079 /* F53OSCServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB0931AB143AB00E24079 /* F53OSCServer.m */; };
+		465AB0AE1AB143AB00E24079 /* F53OSCSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB0951AB143AB00E24079 /* F53OSCSocket.m */; };
+		465AB0AF1AB143AB00E24079 /* F53OSCTimeTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB0971AB143AB00E24079 /* F53OSCTimeTag.m */; };
+		465AB0B01AB143AB00E24079 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB0991AB143AB00E24079 /* GCDAsyncSocket.m */; };
+		465AB0B11AB143AB00E24079 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB09B1AB143AB00E24079 /* GCDAsyncUdpSocket.m */; };
+		465AB0B21AB143AB00E24079 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 465AB09C1AB143AB00E24079 /* LICENSE.txt */; };
+		465AB0B31AB143AB00E24079 /* MetatoneNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB09E1AB143AB00E24079 /* MetatoneNetworkManager.m */; };
+		465AB0B41AB143AB00E24079 /* NSData+F53OSCBlob.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB0A01AB143AB00E24079 /* NSData+F53OSCBlob.m */; };
+		465AB0B51AB143AB00E24079 /* NSDate+F53OSCTimeTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB0A21AB143AB00E24079 /* NSDate+F53OSCTimeTag.m */; };
+		465AB0B61AB143AB00E24079 /* NSNumber+F53OSCNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB0A41AB143AB00E24079 /* NSNumber+F53OSCNumber.m */; };
+		465AB0B71AB143AB00E24079 /* NSString+F53OSCString.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB0A61AB143AB00E24079 /* NSString+F53OSCString.m */; };
+		465AB0B81AB143AB00E24079 /* README.markdown in Sources */ = {isa = PBXBuildFile; fileRef = 465AB0A71AB143AB00E24079 /* README.markdown */; };
+		465AB0BD1AB146B100E24079 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 465AB0BC1AB146B100E24079 /* SRWebSocket.m */; };
+		465AB0BF1AB1474B00E24079 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 465AB0BE1AB1474B00E24079 /* libicucore.dylib */; };
+		465AB0C11AB1475200E24079 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465AB0C01AB1475200E24079 /* CFNetwork.framework */; };
+		465AB0C31AB1475900E24079 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465AB0C21AB1475900E24079 /* Security.framework */; };
+		465AB0C51AB1475F00E24079 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465AB0C41AB1475F00E24079 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		465AB06F1AB1239300E24079 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 465AB04D1AB1239200E24079 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 465AB0541AB1239200E24079;
+			remoteInfo = myo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		465AB0551AB1239200E24079 /* myo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		465AB0591AB1239200E24079 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		465AB05A1AB1239200E24079 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		465AB05C1AB1239200E24079 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		465AB05D1AB1239200E24079 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		465AB05F1AB1239200E24079 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		465AB0601AB1239200E24079 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		465AB0631AB1239200E24079 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		465AB0651AB1239200E24079 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		465AB0681AB1239300E24079 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		465AB06E1AB1239300E24079 /* myoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = myoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		465AB0731AB1239300E24079 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		465AB0741AB1239300E24079 /* myoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = myoTests.m; sourceTree = "<group>"; };
+		465AB07E1AB123AA00E24079 /* MyoKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MyoKit.framework; path = "../../../Downloads/Myo-iOS-SDK-0.4.0/MyoKit.framework"; sourceTree = "<group>"; };
+		465AB0801AB123C400E24079 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		465AB0821AB123D700E24079 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		465AB0851AB143AB00E24079 /* F53OSC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSC.h; sourceTree = "<group>"; };
+		465AB0861AB143AB00E24079 /* F53OSCBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCBundle.h; sourceTree = "<group>"; };
+		465AB0871AB143AB00E24079 /* F53OSCBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F53OSCBundle.m; sourceTree = "<group>"; };
+		465AB0881AB143AB00E24079 /* F53OSCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCClient.h; sourceTree = "<group>"; };
+		465AB0891AB143AB00E24079 /* F53OSCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F53OSCClient.m; sourceTree = "<group>"; };
+		465AB08A1AB143AB00E24079 /* F53OSCFoundationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCFoundationAdditions.h; sourceTree = "<group>"; };
+		465AB08B1AB143AB00E24079 /* F53OSCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCMessage.h; sourceTree = "<group>"; };
+		465AB08C1AB143AB00E24079 /* F53OSCMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F53OSCMessage.m; sourceTree = "<group>"; };
+		465AB08D1AB143AB00E24079 /* F53OSCPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCPacket.h; sourceTree = "<group>"; };
+		465AB08E1AB143AB00E24079 /* F53OSCPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F53OSCPacket.m; sourceTree = "<group>"; };
+		465AB08F1AB143AB00E24079 /* F53OSCParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCParser.h; sourceTree = "<group>"; };
+		465AB0901AB143AB00E24079 /* F53OSCParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F53OSCParser.m; sourceTree = "<group>"; };
+		465AB0911AB143AB00E24079 /* F53OSCProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCProtocols.h; sourceTree = "<group>"; };
+		465AB0921AB143AB00E24079 /* F53OSCServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCServer.h; sourceTree = "<group>"; };
+		465AB0931AB143AB00E24079 /* F53OSCServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F53OSCServer.m; sourceTree = "<group>"; };
+		465AB0941AB143AB00E24079 /* F53OSCSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCSocket.h; sourceTree = "<group>"; };
+		465AB0951AB143AB00E24079 /* F53OSCSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F53OSCSocket.m; sourceTree = "<group>"; };
+		465AB0961AB143AB00E24079 /* F53OSCTimeTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCTimeTag.h; sourceTree = "<group>"; };
+		465AB0971AB143AB00E24079 /* F53OSCTimeTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F53OSCTimeTag.m; sourceTree = "<group>"; };
+		465AB0981AB143AB00E24079 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		465AB0991AB143AB00E24079 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		465AB09A1AB143AB00E24079 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		465AB09B1AB143AB00E24079 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		465AB09C1AB143AB00E24079 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		465AB09D1AB143AB00E24079 /* MetatoneNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetatoneNetworkManager.h; sourceTree = "<group>"; };
+		465AB09E1AB143AB00E24079 /* MetatoneNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetatoneNetworkManager.m; sourceTree = "<group>"; };
+		465AB09F1AB143AB00E24079 /* NSData+F53OSCBlob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+F53OSCBlob.h"; sourceTree = "<group>"; };
+		465AB0A01AB143AB00E24079 /* NSData+F53OSCBlob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+F53OSCBlob.m"; sourceTree = "<group>"; };
+		465AB0A11AB143AB00E24079 /* NSDate+F53OSCTimeTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+F53OSCTimeTag.h"; sourceTree = "<group>"; };
+		465AB0A21AB143AB00E24079 /* NSDate+F53OSCTimeTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+F53OSCTimeTag.m"; sourceTree = "<group>"; };
+		465AB0A31AB143AB00E24079 /* NSNumber+F53OSCNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+F53OSCNumber.h"; sourceTree = "<group>"; };
+		465AB0A41AB143AB00E24079 /* NSNumber+F53OSCNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+F53OSCNumber.m"; sourceTree = "<group>"; };
+		465AB0A51AB143AB00E24079 /* NSString+F53OSCString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+F53OSCString.h"; sourceTree = "<group>"; };
+		465AB0A61AB143AB00E24079 /* NSString+F53OSCString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+F53OSCString.m"; sourceTree = "<group>"; };
+		465AB0A71AB143AB00E24079 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.markdown; sourceTree = "<group>"; };
+		465AB0BA1AB146B100E24079 /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
+		465AB0BB1AB146B100E24079 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
+		465AB0BC1AB146B100E24079 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
+		465AB0BE1AB1474B00E24079 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		465AB0C01AB1475200E24079 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		465AB0C21AB1475900E24079 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		465AB0C41AB1475F00E24079 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		465AB0521AB1239200E24079 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				465AB0C51AB1475F00E24079 /* Foundation.framework in Frameworks */,
+				465AB0C31AB1475900E24079 /* Security.framework in Frameworks */,
+				465AB0C11AB1475200E24079 /* CFNetwork.framework in Frameworks */,
+				465AB0BF1AB1474B00E24079 /* libicucore.dylib in Frameworks */,
+				465AB0831AB123D700E24079 /* SystemConfiguration.framework in Frameworks */,
+				465AB0811AB123C400E24079 /* CoreBluetooth.framework in Frameworks */,
+				465AB07F1AB123AA00E24079 /* MyoKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		465AB06B1AB1239300E24079 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		465AB04C1AB1239200E24079 = {
+			isa = PBXGroup;
+			children = (
+				465AB0C41AB1475F00E24079 /* Foundation.framework */,
+				465AB0C21AB1475900E24079 /* Security.framework */,
+				465AB0C01AB1475200E24079 /* CFNetwork.framework */,
+				465AB0BE1AB1474B00E24079 /* libicucore.dylib */,
+				465AB0B91AB146B100E24079 /* SocketRocket */,
+				465AB0841AB143AB00E24079 /* MetatoneOSC */,
+				465AB0821AB123D700E24079 /* SystemConfiguration.framework */,
+				465AB0801AB123C400E24079 /* CoreBluetooth.framework */,
+				465AB07E1AB123AA00E24079 /* MyoKit.framework */,
+				465AB0571AB1239200E24079 /* myo */,
+				465AB0711AB1239300E24079 /* myoTests */,
+				465AB0561AB1239200E24079 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		465AB0561AB1239200E24079 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				465AB0551AB1239200E24079 /* myo.app */,
+				465AB06E1AB1239300E24079 /* myoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		465AB0571AB1239200E24079 /* myo */ = {
+			isa = PBXGroup;
+			children = (
+				465AB05C1AB1239200E24079 /* AppDelegate.h */,
+				465AB05D1AB1239200E24079 /* AppDelegate.m */,
+				465AB05F1AB1239200E24079 /* ViewController.h */,
+				465AB0601AB1239200E24079 /* ViewController.m */,
+				465AB0621AB1239200E24079 /* Main.storyboard */,
+				465AB0651AB1239200E24079 /* Images.xcassets */,
+				465AB0671AB1239300E24079 /* LaunchScreen.xib */,
+				465AB0581AB1239200E24079 /* Supporting Files */,
+			);
+			path = myo;
+			sourceTree = "<group>";
+		};
+		465AB0581AB1239200E24079 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				465AB0591AB1239200E24079 /* Info.plist */,
+				465AB05A1AB1239200E24079 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		465AB0711AB1239300E24079 /* myoTests */ = {
+			isa = PBXGroup;
+			children = (
+				465AB0741AB1239300E24079 /* myoTests.m */,
+				465AB0721AB1239300E24079 /* Supporting Files */,
+			);
+			path = myoTests;
+			sourceTree = "<group>";
+		};
+		465AB0721AB1239300E24079 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				465AB0731AB1239300E24079 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		465AB0841AB143AB00E24079 /* MetatoneOSC */ = {
+			isa = PBXGroup;
+			children = (
+				465AB0851AB143AB00E24079 /* F53OSC.h */,
+				465AB0861AB143AB00E24079 /* F53OSCBundle.h */,
+				465AB0871AB143AB00E24079 /* F53OSCBundle.m */,
+				465AB0881AB143AB00E24079 /* F53OSCClient.h */,
+				465AB0891AB143AB00E24079 /* F53OSCClient.m */,
+				465AB08A1AB143AB00E24079 /* F53OSCFoundationAdditions.h */,
+				465AB08B1AB143AB00E24079 /* F53OSCMessage.h */,
+				465AB08C1AB143AB00E24079 /* F53OSCMessage.m */,
+				465AB08D1AB143AB00E24079 /* F53OSCPacket.h */,
+				465AB08E1AB143AB00E24079 /* F53OSCPacket.m */,
+				465AB08F1AB143AB00E24079 /* F53OSCParser.h */,
+				465AB0901AB143AB00E24079 /* F53OSCParser.m */,
+				465AB0911AB143AB00E24079 /* F53OSCProtocols.h */,
+				465AB0921AB143AB00E24079 /* F53OSCServer.h */,
+				465AB0931AB143AB00E24079 /* F53OSCServer.m */,
+				465AB0941AB143AB00E24079 /* F53OSCSocket.h */,
+				465AB0951AB143AB00E24079 /* F53OSCSocket.m */,
+				465AB0961AB143AB00E24079 /* F53OSCTimeTag.h */,
+				465AB0971AB143AB00E24079 /* F53OSCTimeTag.m */,
+				465AB0981AB143AB00E24079 /* GCDAsyncSocket.h */,
+				465AB0991AB143AB00E24079 /* GCDAsyncSocket.m */,
+				465AB09A1AB143AB00E24079 /* GCDAsyncUdpSocket.h */,
+				465AB09B1AB143AB00E24079 /* GCDAsyncUdpSocket.m */,
+				465AB09C1AB143AB00E24079 /* LICENSE.txt */,
+				465AB09D1AB143AB00E24079 /* MetatoneNetworkManager.h */,
+				465AB09E1AB143AB00E24079 /* MetatoneNetworkManager.m */,
+				465AB09F1AB143AB00E24079 /* NSData+F53OSCBlob.h */,
+				465AB0A01AB143AB00E24079 /* NSData+F53OSCBlob.m */,
+				465AB0A11AB143AB00E24079 /* NSDate+F53OSCTimeTag.h */,
+				465AB0A21AB143AB00E24079 /* NSDate+F53OSCTimeTag.m */,
+				465AB0A31AB143AB00E24079 /* NSNumber+F53OSCNumber.h */,
+				465AB0A41AB143AB00E24079 /* NSNumber+F53OSCNumber.m */,
+				465AB0A51AB143AB00E24079 /* NSString+F53OSCString.h */,
+				465AB0A61AB143AB00E24079 /* NSString+F53OSCString.m */,
+				465AB0A71AB143AB00E24079 /* README.markdown */,
+			);
+			path = MetatoneOSC;
+			sourceTree = "<group>";
+		};
+		465AB0B91AB146B100E24079 /* SocketRocket */ = {
+			isa = PBXGroup;
+			children = (
+				465AB0BA1AB146B100E24079 /* SocketRocket-Prefix.pch */,
+				465AB0BB1AB146B100E24079 /* SRWebSocket.h */,
+				465AB0BC1AB146B100E24079 /* SRWebSocket.m */,
+			);
+			path = SocketRocket;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		465AB0541AB1239200E24079 /* myo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 465AB0781AB1239300E24079 /* Build configuration list for PBXNativeTarget "myo" */;
+			buildPhases = (
+				465AB0511AB1239200E24079 /* Sources */,
+				465AB0521AB1239200E24079 /* Frameworks */,
+				465AB0531AB1239200E24079 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = myo;
+			productName = myo;
+			productReference = 465AB0551AB1239200E24079 /* myo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		465AB06D1AB1239300E24079 /* myoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 465AB07B1AB1239300E24079 /* Build configuration list for PBXNativeTarget "myoTests" */;
+			buildPhases = (
+				465AB06A1AB1239300E24079 /* Sources */,
+				465AB06B1AB1239300E24079 /* Frameworks */,
+				465AB06C1AB1239300E24079 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				465AB0701AB1239300E24079 /* PBXTargetDependency */,
+			);
+			name = myoTests;
+			productName = myoTests;
+			productReference = 465AB06E1AB1239300E24079 /* myoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		465AB04D1AB1239200E24079 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Larry Wang";
+				TargetAttributes = {
+					465AB0541AB1239200E24079 = {
+						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 2Z44ZRUPZ4;
+					};
+					465AB06D1AB1239300E24079 = {
+						CreatedOnToolsVersion = 6.0.1;
+						TestTargetID = 465AB0541AB1239200E24079;
+					};
+				};
+			};
+			buildConfigurationList = 465AB0501AB1239200E24079 /* Build configuration list for PBXProject "myo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 465AB04C1AB1239200E24079;
+			productRefGroup = 465AB0561AB1239200E24079 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				465AB0541AB1239200E24079 /* myo */,
+				465AB06D1AB1239300E24079 /* myoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		465AB0531AB1239200E24079 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				465AB0B21AB143AB00E24079 /* LICENSE.txt in Resources */,
+				465AB0641AB1239200E24079 /* Main.storyboard in Resources */,
+				465AB0691AB1239300E24079 /* LaunchScreen.xib in Resources */,
+				465AB0661AB1239200E24079 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		465AB06C1AB1239300E24079 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		465AB0511AB1239200E24079 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				465AB0B81AB143AB00E24079 /* README.markdown in Sources */,
+				465AB0B01AB143AB00E24079 /* GCDAsyncSocket.m in Sources */,
+				465AB0B71AB143AB00E24079 /* NSString+F53OSCString.m in Sources */,
+				465AB0AF1AB143AB00E24079 /* F53OSCTimeTag.m in Sources */,
+				465AB0AB1AB143AB00E24079 /* F53OSCPacket.m in Sources */,
+				465AB0B41AB143AB00E24079 /* NSData+F53OSCBlob.m in Sources */,
+				465AB0AE1AB143AB00E24079 /* F53OSCSocket.m in Sources */,
+				465AB0AD1AB143AB00E24079 /* F53OSCServer.m in Sources */,
+				465AB0AC1AB143AB00E24079 /* F53OSCParser.m in Sources */,
+				465AB0611AB1239200E24079 /* ViewController.m in Sources */,
+				465AB05E1AB1239200E24079 /* AppDelegate.m in Sources */,
+				465AB0B51AB143AB00E24079 /* NSDate+F53OSCTimeTag.m in Sources */,
+				465AB0BD1AB146B100E24079 /* SRWebSocket.m in Sources */,
+				465AB0A81AB143AB00E24079 /* F53OSCBundle.m in Sources */,
+				465AB0B31AB143AB00E24079 /* MetatoneNetworkManager.m in Sources */,
+				465AB0A91AB143AB00E24079 /* F53OSCClient.m in Sources */,
+				465AB0AA1AB143AB00E24079 /* F53OSCMessage.m in Sources */,
+				465AB0B11AB143AB00E24079 /* GCDAsyncUdpSocket.m in Sources */,
+				465AB05B1AB1239200E24079 /* main.m in Sources */,
+				465AB0B61AB143AB00E24079 /* NSNumber+F53OSCNumber.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		465AB06A1AB1239300E24079 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				465AB0751AB1239300E24079 /* myoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		465AB0701AB1239300E24079 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 465AB0541AB1239200E24079 /* myo */;
+			targetProxy = 465AB06F1AB1239300E24079 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		465AB0621AB1239200E24079 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				465AB0631AB1239200E24079 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		465AB0671AB1239300E24079 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				465AB0681AB1239300E24079 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		465AB0761AB1239300E24079 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		465AB0771AB1239300E24079 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		465AB0791AB1239300E24079 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Larry/Downloads/Myo-iOS-SDK-0.4.0",
+				);
+				INFOPLIST_FILE = myo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		465AB07A1AB1239300E24079 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Larry/Downloads/Myo-iOS-SDK-0.4.0",
+				);
+				INFOPLIST_FILE = myo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		465AB07C1AB1239300E24079 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = myoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/myo.app/myo";
+			};
+			name = Debug;
+		};
+		465AB07D1AB1239300E24079 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = myoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/myo.app/myo";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		465AB0501AB1239200E24079 /* Build configuration list for PBXProject "myo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				465AB0761AB1239300E24079 /* Debug */,
+				465AB0771AB1239300E24079 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		465AB0781AB1239300E24079 /* Build configuration list for PBXNativeTarget "myo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				465AB0791AB1239300E24079 /* Debug */,
+				465AB07A1AB1239300E24079 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		465AB07B1AB1239300E24079 /* Build configuration list for PBXNativeTarget "myoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				465AB07C1AB1239300E24079 /* Debug */,
+				465AB07D1AB1239300E24079 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 465AB04D1AB1239200E24079 /* Project object */;
+}
