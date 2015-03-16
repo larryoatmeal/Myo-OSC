@@ -22,12 +22,20 @@
 @property (strong, nonatomic) NSUUID *leftMyoID;
 @property (strong, nonatomic) NSUUID *rightMyoID;
 @property (strong, nonatomic) F53OSCClient *oscClient;
+@property (nonatomic) BOOL leftConnected;
+@property (nonatomic) BOOL rightConnected;
+@property (strong, nonatomic) NSString *performerId;
+@property (strong, nonatomic) NSString *serverIP;
+@property (nonatomic) int portNumber;
+@property (nonatomic) BOOL moreReconnectNeeded;
+
 
 - (IBAction)didTapConnectLeft:(id)sender;
 - (IBAction)didTapConnectRight:(id)sender;
 
 
 - (IBAction)didTapSettings:(id)sender;
+- (IBAction)didTapReset:(id)sender;
 
 
 
@@ -35,16 +43,13 @@
 
 @implementation ViewController
 
+
+//OSC Values
 const double LEFT=0;
 const double RIGHT=1;
 const double NONE = -1;
 
-//OSC
-NSString *const LEFT_OSC = @"LEFT";
-NSString *const RIGHT_OSC = @"RIGHT";
-NSString *const ERROR_OSC = @"ERROR";
-
-
+//OSC Addresses
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,6 +61,10 @@ NSString *const ERROR_OSC = @"ERROR";
                                              selector:@selector(didConnectDevice:)
                                                  name:TLMHubDidConnectDeviceNotification
                                                object:nil];
+    
+    
+    
+    
     // Posted whenever a TLMMyo disconnects.
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didDisconnectDevice:)
@@ -99,6 +108,16 @@ NSString *const ERROR_OSC = @"ERROR";
     
     //OSC client
     self.oscClient = [[F53OSCClient alloc]init];
+    
+    
+    self.serverIP = @"18.111.17.94";
+    self.portNumber = 9000;
+    
+    //Initialize
+    self.leftConnected = false;
+    self.rightConnected = false;
+    self.moreReconnectNeeded = false;
+    
 }
 
 
@@ -114,17 +133,50 @@ NSString *const ERROR_OSC = @"ERROR";
     [self.accelerationProgressBar setHidden:NO];
     [self.accelerationLabel setHidden:NO];
     
-    NSLog(@"notification received: %@", notification);
     
     
     if(self.currentlyAttaching == RIGHT){
-        NSLog(@"RIGHT ATTACHED SUCCESFULLY");
+        NSLog(@"RIGHT DETECTED");
+        NSArray* myoIds = [self getConnectedMyoIds];
+        for(int i = 0; i < myoIds.count; i++){
+            if(myoIds[i] != self.leftMyoID){
+                self.rightMyoID = myoIds[i];
+                self.rightConnected = true;
+                NSLog(@"RIGHT CONNECTED");
+            }
+        }
+        if(!self.rightConnected){
+            NSLog(@"CANNOT CONNECT LEFT TO RIGHT MYO");
+            [[TLMHub sharedHub] detachFromMyo:[self getMyoWithId:self.leftMyoID]];
+        }
+        self.currentlyAttaching = NONE;
+        
     }
-    else if (self.currentlyAttaching == LEFT){
-        NSLog(@"LEFT ATTACHED SUCCESFULLY");
+    else if(self.currentlyAttaching == LEFT){
+        NSLog(@"LEFT DETECTED");
+        NSArray* myoIds = [self getConnectedMyoIds];
+        for(int i = 0; i < myoIds.count; i++){
+            if(myoIds[i] != self.rightMyoID){
+                self.leftMyoID = myoIds[i];
+                self.leftConnected = true;
+                NSLog(@"LEFT CONNECTED");
+            }
+        }
+        if(!self.leftConnected){
+            NSLog(@"CANNOT CONNECT RIGHT TO LEFT MYO");
+            [[TLMHub sharedHub] detachFromMyo:[self getMyoWithId:self.rightMyoID]];
+        }
+        
+        self.currentlyAttaching = NONE;
+    }
+    if(self.rightConnected == true && self.leftConnected == true){
+        [self everythingReady];
     }
     
-    
+    if(self.moreReconnectNeeded){
+        [self reconnect];
+        self.moreReconnectNeeded = false;
+    }
 }
 - (void)didDisconnectDevice:(NSNotification *)notification {
     // Remove the text from our labels when the Myo has disconnected.
@@ -134,6 +186,23 @@ NSString *const ERROR_OSC = @"ERROR";
     // Hide the acceleration progress bar.
     [self.accelerationProgressBar setHidden:YES];
     [self.accelerationLabel setHidden:YES];
+    
+    NSLog(@"DISCONNECTED DEVICE");
+    
+    NSArray *myoIds = [self getConnectedMyoIds];
+    
+    
+    if(self.leftConnected && ![myoIds containsObject:self.leftMyoID]){
+        self.leftConnected = false;
+        NSLog(@"LEFT WAS DISCONNECTED:%@",self.leftMyoID);
+        [self reconnect];
+        
+    }
+    if(self.rightConnected && ![myoIds containsObject:self.rightMyoID]){
+        self.rightConnected = false;
+        NSLog(@"RIGHT WAS DISCONNECTED:%@",self.rightMyoID);
+        [self reconnect];
+    }
 }
 - (void)didUnlockDevice:(NSNotification *)notification {
     // Update the label to reflect Myo's lock state.
@@ -152,18 +221,19 @@ NSString *const ERROR_OSC = @"ERROR";
     self.armLabel.text = [NSString stringWithFormat:@"Arm: %@ X-Direction: %@", armString, directionString];
     self.lockLabel.text = @"Locked";
     
-//    //Register as left or right
-//    if(self.currentlyAttaching == LEFT){
-//        self.leftMyoID = armEvent.myo.identifier;
-//        NSLog(@"Succesfully registered LEFT:@%@", self.leftMyoID);
-//    }
-//    else if(self.currentlyAttaching == RIGHT){
-//        self.rightMyoID = armEvent.myo.identifier;
-//        NSLog(@"Succesfully registered RIGHT:@%@", self.leftMyoID);
-//    }
+    //DON'T USE ANYMORE
+    //    //Register as left or right
+    //    if(self.currentlyAttaching == LEFT){
+    //        self.leftMyoID = armEvent.myo.identifier;
+    //        NSLog(@"Succesfully registered LEFT:@%@", self.leftMyoID);
+    //    }
+    //    else if(self.currentlyAttaching == RIGHT){
+    //        self.rightMyoID = armEvent.myo.identifier;
+    //        NSLog(@"Succesfully registered RIGHT:@%@", self.leftMyoID);
+    //    }
     
-//    NSLog(@"notification received: %@", notification);
-
+    //    NSLog(@"notification received: %@", notification);
+    
     
     
 }
@@ -183,38 +253,66 @@ NSString *const ERROR_OSC = @"ERROR";
     // Next, we want to apply a rotation and perspective transformation based on the pitch, yaw, and roll.
     CATransform3D rotationAndPerspectiveTransform = CATransform3DConcat(CATransform3DConcat(CATransform3DRotate (CATransform3DIdentity, angles.pitch.radians, -1.0, 0.0, 0.0), CATransform3DRotate(CATransform3DIdentity, angles.yaw.radians, 0.0, 1.0, 0.0)), CATransform3DRotate(CATransform3DIdentity, angles.roll.radians, 0.0, 0.0, -1.0));
     // Apply the rotation and perspective transform to helloLabel.
+    
+    float w = orientationEvent.quaternion.w;
+    float x = orientationEvent.quaternion.x;
+    float y = orientationEvent.quaternion.y;
+    float z = orientationEvent.quaternion.z;
+    
+    NSInteger leftOrRight = [self getLeftOrRightInteger:orientationEvent.myo.identifier];
+    NSString *leftOrRightString = [self getLeftOrRightString:orientationEvent.myo.identifier];
+    
+    if(leftOrRight != NONE){
+        NSString *address = [self oscAddressWithId:@"id" withDataType:@"ori" withHand:leftOrRightString];
+        [self sendOrientationOSC:address :x :y :z :w];
+    }
+    
     self.helloLabel.layer.transform = rotationAndPerspectiveTransform;
 }
+
+
+-(NSString*)oscAddressWithId:(NSString *)playerId withDataType:(NSString *)dataType withHand:(NSString *)hand{
+    return [NSString stringWithFormat:@"/%@/%@/%@/%@", playerId, @"myo", dataType, hand];
+}
+
+-(void)sendOrientationOSC:(NSString *)address :(float)x :(float)y :(float)z :(float)w{
+    F53OSCMessage *message =
+    [F53OSCMessage messageWithAddressPattern:address
+                                   arguments:@[
+                                               [NSNumber numberWithFloat:x],
+                                               [NSNumber numberWithFloat:y],
+                                               [NSNumber numberWithFloat:z],
+                                               [NSNumber numberWithFloat:w]]
+     ];
+    [self.oscClient sendPacket:message toHost:self.serverIP onPort:self.portNumber];
+}
+
 - (void)didReceiveAccelerometerEvent:(NSNotification *)notification {
     // Retrieve the accelerometer event from the NSNotification's userInfo with the kTLMKeyAccelerometerEvent.
     TLMAccelerometerEvent *accelerometerEvent = notification.userInfo[kTLMKeyAccelerometerEvent];
-   
     
     
-        //Register as left or right
-        if(self.currentlyAttaching == LEFT){
-            
-            if(accelerometerEvent.myo.identifier != self.rightMyoID){
-                self.leftMyoID = accelerometerEvent.myo.identifier;
-                NSLog(@"Succesfully registered LEFT:@%@", self.leftMyoID);
-                self.currentlyAttaching = NONE;
-            }
-            
-        }
-        else if(self.currentlyAttaching == RIGHT){
-            if(accelerometerEvent.myo.identifier != self.leftMyoID){
-                self.rightMyoID = accelerometerEvent.myo.identifier;
-                NSLog(@"Succesfully registered RIGHT:@%@", self.rightMyoID);
-                self.currentlyAttaching = NONE;
-            }
-
-        }
-
-    NSLog(@"LEFT OR RIGHT:%d",[self getLeftOrRightInteger:accelerometerEvent.myo.identifier]);
-    
-    
-    
-
+    // DON'T USE, DONE IN ATTACH NOW
+    //    //Register as left or right
+    //    if(self.currentlyAttaching == LEFT){
+    //
+    //        if(accelerometerEvent.myo.identifier != self.rightMyoID){
+    //            self.leftMyoID = accelerometerEvent.myo.identifier;
+    //            NSLog(@"Succesfully registered LEFT:@%@", self.leftMyoID);
+    //            self.leftConnected = true;
+    //            self.currentlyAttaching = NONE;
+    //        }
+    //
+    //    }
+    //    else if(self.currentlyAttaching == RIGHT){
+    //        if(accelerometerEvent.myo.identifier != self.leftMyoID){
+    //            self.rightMyoID = accelerometerEvent.myo.identifier;
+    //            NSLog(@"Succesfully registered RIGHT:@%@", self.rightMyoID);
+    //            self.rightConnected = false;
+    //            self.currentlyAttaching = NONE;
+    //        }
+    //    }
+    //
     
     // Get the acceleration vector from the accelerometer event.
     TLMVector3 accelerationVector = accelerometerEvent.vector;
@@ -227,22 +325,20 @@ NSString *const ERROR_OSC = @"ERROR";
      float y = accelerationVector.y;
      float z = accelerationVector.z;
      */
-    float x = accelerationVector.x;
-    float y = accelerationVector.y;
-    float z = accelerationVector.z;
-    
-    NSInteger leftOrRight = [self getLeftOrRightInteger:accelerometerEvent.myo.identifier];
-    
-    
+    //    float x = accelerationVector.x;
+    //    float y = accelerationVector.y;
+    //    float z = accelerationVector.z;
+    //
+    //    NSInteger leftOrRight = [self getLeftOrRightInteger:accelerometerEvent.myo.identifier];
+    //
     //SEND OSC
-    
-    F53OSCMessage *message =
-    [F53OSCMessage messageWithAddressPattern:@"/leftOrRight/x/y/z"
-                                   arguments:@[[NSNumber numberWithInt:leftOrRight],[NSNumber numberWithFloat:x],[NSNumber numberWithFloat:y],[NSNumber numberWithFloat:z]]];
-    [self.oscClient sendPacket:message toHost:@"18.189.10.92" onPort:8000];
-    
-    
-    
+    //
+    //    if(leftOrRight != NONE){
+    //        F53OSCMessage *message =
+    //        [F53OSCMessage messageWithAddressPattern:@"/leftOrRight/x/y/z"
+    //                                       arguments:@[[NSNumber numberWithInt:leftOrRight],[NSNumber numberWithFloat:x],[NSNumber numberWithFloat:y],[NSNumber numberWithFloat:z]]];
+    //        [self.oscClient sendPacket:message toHost:@"18.111.15.21" onPort:8000];
+    //    }
 }
 - (void)didReceivePoseChange:(NSNotification *)notification {
     // Retrieve the pose from the NSNotification's userInfo with the kTLMKeyPose key.
@@ -283,18 +379,18 @@ NSString *const ERROR_OSC = @"ERROR";
             self.helloLabel.textColor = [UIColor greenColor];
             break;
     }
-    // Unlock the Myo whenever we receive a pose
-    if (pose.type == TLMPoseTypeUnknown || pose.type == TLMPoseTypeRest) {
-        // Causes the Myo to lock after a short period.
-        [pose.myo unlockWithType:TLMUnlockTypeTimed];
-    } else {
-        // Keeps the Myo unlocked until specified.
-        // This is required to keep Myo unlocked while holding a pose, but if a pose is not being held, use
-        // TLMUnlockTypeTimed to restart the timer.
-        [pose.myo unlockWithType:TLMUnlockTypeHold];
-        // Indicates that a user action has been performed.
-        [pose.myo indicateUserAction];
-    }
+    //    // Unlock the Myo whenever we receive a pose
+    //    if (pose.type == TLMPoseTypeUnknown || pose.type == TLMPoseTypeRest) {
+    //        // Causes the Myo to lock after a short period.
+    //        [pose.myo unlockWithType:TLMUnlockTypeTimed];
+    //    } else {
+    //        // Keeps the Myo unlocked until specified.
+    //        // This is required to keep Myo unlocked while holding a pose, but if a pose is not being held, use
+    //        // TLMUnlockTypeTimed to restart the timer.
+    //        [pose.myo unlockWithType:TLMUnlockTypeHold];
+    //        // Indicates that a user action has been performed.
+    //        [pose.myo indicateUserAction];
+    //    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -319,27 +415,108 @@ NSString *const ERROR_OSC = @"ERROR";
 
 - (IBAction)didTapConnectLeft:(id)sender {
     NSLog(@"ATTEMTPING TO CONNECT LEFT");
-    self.currentlyAttaching = LEFT;
-    [[TLMHub sharedHub] attachToAdjacent];
-    
+    if(self.leftConnected){
+        NSLog(@"ALREADY CONNECTED TO LEFT");
+    }else{
+        self.currentlyAttaching = LEFT;
+        [[TLMHub sharedHub] attachToAdjacent];
+    }
 }
 
 - (IBAction)didTapConnectRight:(id)sender {
     NSLog(@"ATTEMTPING TO CONNECT RIGHT");
-    self.currentlyAttaching = RIGHT;
-    [[TLMHub sharedHub] attachToAdjacent];
-    
+    if(self.rightConnected){
+        NSLog(@"ALREADY CONNECTED TO RIGHT");
+    }else{
+        self.currentlyAttaching = RIGHT;
+        [[TLMHub sharedHub] attachToAdjacent];
+    }
+}
+- (IBAction)didTapReset:(id)sender {
+    [self hard_reset];
 }
 
-- (NSString*)getLeftOrRightString:(NSUUID*) myoId{
-    if(myoId == self.leftMyoID){
-        return LEFT_OSC;
+- (BOOL) isLeftConnected{
+    return self.leftConnected;
+}
+- (BOOL) isRightConnected{
+    return self.rightConnected;
+}
+- (NSUUID *) getLeftMyoID{
+    return self.leftMyoID;
+}
+
+- (NSUUID *) getRightMyoID{
+    return self.rightMyoID;
+}
+
+- (NSMutableArray *)getConnectedMyoIds{
+    NSArray *myos = [[TLMHub sharedHub] myoDevices];
+    NSMutableArray *myoIds = [NSMutableArray arrayWithCapacity:2];
+    
+    for (int i=0; i<myos.count; i++) {
+        TLMMyo *myo = myos[i];
+        [myoIds addObject:myo.identifier];
     }
-    else if (myoId == self.rightMyoID){
-        return RIGHT_OSC;
+    return myoIds;
+}
+
+- (TLMMyo *)getMyoWithId:(NSUUID*)myoId{
+    NSArray *myos = [[TLMHub sharedHub] myoDevices];
+    
+    for (int i=0; i<myos.count; i++) {
+        TLMMyo *myo = myos[i];
+        if(myo.identifier == myoId){
+            return myo;
+        }
     }
-    else{
-        return ERROR_OSC;
+    return nil;
+}
+
+
+//Called when everything is setup
+- (void) everythingReady{
+    NSLog(@"Everything Ready");
+}
+
+- (void) rightDisconnected{
+    //try to reconnect
+}
+
+- (void) leftDisconnected{
+    //try to reconnect
+}
+
+
+- (void) reconnect{
+    //can only reconnect one at a time. Always attach left first
+    if(self.leftMyoID != nil && !self.leftConnected){
+        NSLog(@"ATTEMPTING TO RECONNECT LEFT");
+        [[TLMHub sharedHub] attachByIdentifier:self.leftMyoID];
+        self.currentlyAttaching=LEFT;
+        self.moreReconnectNeeded = self.rightMyoID != nil && !self.rightConnected;
+    }
+    
+    else if(self.rightMyoID != nil && !self.rightConnected){
+        NSLog(@"ATTEMPTING TO RECONNECT RIGHT");
+        self.currentlyAttaching=RIGHT;
+        [[TLMHub sharedHub] attachByIdentifier:self.rightMyoID];
+    }
+}
+
+
+- (void) hard_reset{
+    self.leftConnected = false;
+    self.rightConnected = false;
+    self.currentlyAttaching=NONE;
+    
+    self.leftMyoID = Nil;
+    self.rightMyoID = Nil;
+    
+    NSArray *myos = [[TLMHub sharedHub] myoDevices];
+    
+    for(int i = 0; i < myos.count; i++){
+        [[TLMHub sharedHub] detachFromMyo:myos[i]];
     }
 }
 
@@ -357,9 +534,23 @@ NSString *const ERROR_OSC = @"ERROR";
 }
 
 
+- (NSString*)getLeftOrRightString:(NSUUID*) myoId{
+    if(myoId == self.leftMyoID){
+        return @"left";
+    }
+    else if (myoId == self.rightMyoID){
+        return @"right";
+    }
+    else{
+        return @"error";
+    }
+}
 
 
-    
-    
+
+
+
+
+
 
 @end

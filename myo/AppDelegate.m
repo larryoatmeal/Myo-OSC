@@ -15,12 +15,12 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
     [TLMHub sharedHub];
     [TLMHub sharedHub].myoConnectionAllowance = 2;
+    [[TLMHub sharedHub] setLockingPolicy:TLMLockingPolicyNone];
     
     return YES;
 }
@@ -46,5 +46,18 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
++ (NSString *) appVersion
+{
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+}
+
++ (NSString *) build
+{
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
+}
+
+
+
 
 @end

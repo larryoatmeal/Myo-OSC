@@ -10,6 +10,13 @@
 
 @interface ViewController : UIViewController
 
+- (BOOL) isLeftConnected;
+- (BOOL) isRightConnected;
+
+//Returns UUID of associated Myo. Does not mean necessarily connected.
+- (NSUUID *) getLeftMyoID;
+- (NSUUID *) getRightMyoID;
 
 @end
+
 
